@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <%- include('style.ejs') %>
+</head>
+
+<body>
+    <div id="containerInicio">
+        <%- include('_header.ejs') %>
+            <section id="cards">
+                <div id="cardsparent">
+                        <div class="cardsChildren" style="background: rgba(0, 0, 0, 0.5) url('https://ladefinicion.com/wp-content/uploads/2019/08/paisaje-natural.jpg') no-repeat; background-size: cover;">
+                            <div class="cardContent">
+                                <strong>Titulo</strong><br>
+                                <label>Descripción</label><br>
+                                <label>Autor: asdf | fecha: asdf</label><br>
+                                <a class="verMas">Ver mas...</a>
+                            </div>
+                        </div>
+                        <div class="cardsChildren">
+                            </div>
+                        <div class="cardsChildren">
+                            </div>
+                        <div class="cardsChildren">
+                            </div>
+                        <div class="cardsChildren">
+                            </div>
+                        <div class="cardsChildren">
+                            </div>
+                        
+                        
+                </div>
+            </section>
+
+            <section id="postSeleccionado"></section>
+
+            <%- include('_footer.ejs') %>
+    </div>
+</body>
+
+</html>
