@@ -35,4 +35,22 @@ app.get("/crear", async function (req, res) {
     });
 });
 
+app.post("/crearPublicacion", async (req, res)=>{
+    const fecha = new Date();
+    var dia = (fecha.getFullYear())+"/"+((fecha.getMonth()+1))+"/"+(fecha.getDay())+" "+fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
+    console.log(req.body.descripcion);
+    var nueva_publicacion = new publicaciones({
+        autor:req.body.autor,
+        titulo:req.body.titulo,
+        imagen:req.body.imagen,
+        descripcion:req.body.descripcion,
+        fecha:dia,
+        tags:req.body.tags
+    });
+    await nueva_publicacion.save();
+    console.log("Se ha creado una nueva publicacion");
+    res.redirect("/crear");
+
+})
+
 app.listen(3000);

@@ -7,11 +7,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
     <%- include('style.ejs') %>
+        <style>
+            #total{
+                background-color: white;
+                text-align: center;
+                margin: 0 auto;
+                border-radius: 7px;
+                padding: 10px;
+                width: 95%;
+            }
+            #flex {
+                display: flex;
+                margin-left: 2px;
+                margin-right: 2px;
+            }
+
+            .box {
+                width: 50%;
+                padding-right: 100px;
+            }
+        </style>
 </head>
 
 <body>
     <%- include('_header.ejs') %>
-    <%- include('_footer.ejs') %>
+        <div id="total">
+            <h1>Crear un post</h1><hr>
+            <div id="flex">
+                <div id="contformCrear" class="box">
+                    <form id="formCrear" action="/crearPublicacion" method="POST">
+                    <!-- <span><label>Creado el: 30/90/24. </label> <label>Ult. Modific. hecha el 31/90/24</label> </span> -->
+                    <input type="text" placeholder="Escribe tu nombre" name="autor">
+                    <input type="text" placeholder="Agrega un título a tu post" name="titulo"><br><br>
+                    <input type="text" placeholder="Escribe la URL de la imagen que contendrá tu post" name="imagen"><br><br>
+                    <textarea cols="30" rows="10" placeholder="Escribe el contenido de tu post aquí..." name="descripcion"></textarea><br><br>
+                    <input type="text" placeholder="Etiquetas" name="tags"><br><br>
+                    <button type="submit">Publicar</button>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+
+
+        <%- include('_footer.ejs') %>
 </body>
 
 </html>
