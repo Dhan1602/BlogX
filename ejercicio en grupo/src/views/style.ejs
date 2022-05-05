@@ -1,6 +1,6 @@
 <style>
     * {
-        transition: all 0.1s ease 0s;
+        transition: all 0.3s ease 0s;
         font-family: Roboto, sans-serif;
     }
 
@@ -23,6 +23,7 @@
         margin-bottom: 10px;
         z-index: 3;
         user-select: none;
+        transition: all 0.1s ease 0s;
     }
 
     #logo,
@@ -91,8 +92,12 @@
         border-radius: 20px;
         border: white solid 7px;
         box-sizing: border-box;
+        padding-top: 10px;
     }
-
+    .cardsChildren:hover{
+        transform: translateY(-8px);
+        border: rgb(219, 206, 193) solid 7px;
+    }
     .verMas {
         color: rgb(255, 98, 0);
         cursor: pointer;
@@ -102,7 +107,27 @@
         position: absolute;
         bottom: 20px;
         left: 20px;
-        font-size: 25px;
+        font-size: 17px;
+    }
+
+    .editores{
+        font-size: 23px;
+        opacity: 0;
+    }
+
+    #botModificar{
+        margin-left: 10px;
+        color: rgb(255, 125, 45);
+       }
+
+    #botEliminar{
+        margin-right: 10px;
+        color: rgb(255, 125, 45);
+        float: right;
+    }
+    .editores:hover{
+        color: rgb(255, 142, 71);
+        opacity: 100%;
     }
 
     /* RESPONSIVE */
@@ -141,8 +166,12 @@
             margin-top: 12vw;
             margin-bottom: 12vw;
         }
+        #cardsparent {
+            grid-template-columns: repeat(1, auto);
+        }
         footer{
             font-size: 15px;
         }
     }
+
 </style>

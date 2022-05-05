@@ -24,8 +24,10 @@ var publicaciones = require("./src/models/posts");
 
 
 app.get("/inicio", async function (req, res) {
+    var posts = await publicaciones.find();
     res.render("index",{
-        seleccionado: "Inicio"
+        seleccionado: "Inicio",
+        cards:posts
     });
 });
 
