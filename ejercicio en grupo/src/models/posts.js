@@ -9,7 +9,15 @@ var post = new Schema({
         type: String,
         default:"..."
     },
+    descripcion_corta:{
+        type: String,
+        default:"..."
+    },
     fecha:String,
+    ult_modificacion:{
+        type: String,
+        default:"Nunca"
+    },
     tags:String,
 });
 

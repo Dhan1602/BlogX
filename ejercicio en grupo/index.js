@@ -38,12 +38,13 @@ app.get("/crear", async function (req, res) {
 app.post("/crearPublicacion", async (req, res)=>{
     const fecha = new Date();
     var dia = (fecha.getFullYear())+"/"+((fecha.getMonth()+1))+"/"+(fecha.getDay())+" "+fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
-    console.log(req.body.descripcion);
+    var dcorta = (req.body.descripcion).substring(0, 25)+"...";
     var nueva_publicacion = new publicaciones({
         autor:req.body.autor,
         titulo:req.body.titulo,
         imagen:req.body.imagen,
         descripcion:req.body.descripcion,
+        descripcion_corta:dcorta,
         fecha:dia,
         tags:req.body.tags
     });
