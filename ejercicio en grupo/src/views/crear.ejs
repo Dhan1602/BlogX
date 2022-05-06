@@ -64,11 +64,12 @@
 
 <body>
     <%- include('_header.ejs') %>
+    <% if(editando==false){%>
         <div id="total">
             <h1><%=title %></h1>
             <hr>
 
-            <form id="formCrear" action="/crearPublicacion" method="POST">
+            <form id="formCrear" action="<%=link%>" method="POST">
                 <!-- <span><label>Creado el: 30/90/24. </label> <label>Ult. Modific. hecha el 31/90/24</label> </span> -->
                 <input type="text" placeholder="Escribe tu nombre" name="autor"><br><br>
                 <input type="text" placeholder="Agrega un título a tu post" name="titulo"><br><br>
@@ -77,13 +78,43 @@
                 <textarea cols="45.5" rows="10" placeholder="Escribe el contenido de tu post aquí..."
                     name="descripcion"></textarea><br><br>
                 <input type="text" placeholder="Etiquetas" name="tags"><br><br>
-                <button type="submit">Publicar</button>
+                <button type="submit" id="btnCrear"><%=boton %></button>
             </form>
 
-        </div>
+        </div><%} else{%>
+            <div id="total">
+                <h1><%=title %></h1>
+                <hr>
+    
+                <form id="formCrear" action="<%=link%>" method="POST">
+                    <!-- <span><label>Creado el: 30/90/24. </label> <label>Ult. Modific. hecha el 31/90/24</label> </span> -->
+                    <input value="<%= documentos.autor%>" type="text" placeholder="Escribe tu nombre" name="autor"><br><br>
+                    <input value="<%= documentos.titulo%>" type="text" placeholder="Agrega un título a tu post" name="titulo"><br><br>
+                    <input value="<%= documentos.imagen%>" type="text" placeholder="Escribe la URL de la imagen que contendrá tu post"
+                        name="imagen"><br><br>
+                    <textarea cols="45.5" rows="10" placeholder="Escribe el contenido de tu post aquí..."
+                        name="descripcion"><%= documentos.descripcion%></textarea><br><br>
+                    <input value="<%= documentos.tags%>" type="text" placeholder="Etiquetas" name="tags"><br><br>
+                    <button type="submit" id="btnModificar"><%=boton %></button>
+                </form>
+    
+            </div> <%}%>
 
 
         <%- include('_footer.ejs') %>
+
+        <script>
+            var botonModificar= document.getElementById("btnModificar")
+            botonModificar.addEventListener("click", function(){
+                alert("La publicacion se ha modificado exitosamente!")
+            })
+
+            var botonCrear= document.getElementById("btnCrear")
+            botonCrear.addEventListener("click", function(){
+                alert("La publicacion se ha creado exitosamente!")
+            })
+            
+        </script>
 </body>
 
 </html>

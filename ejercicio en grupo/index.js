@@ -35,7 +35,9 @@ app.get("/crear", async function (req, res) {
     res.render("crear",{
         seleccionado:"Crear", 
         title: "Crear un post",
-        boton: "Publicar"
+        link: "/crearPublicacion",
+        boton: "Publicar",
+        editando:false
     });
 });
 
@@ -57,5 +59,45 @@ app.post("/crearPublicacion", async (req, res)=>{
     res.redirect("/crear");
 
 })
+
+app.get("/modificar/:id", async(req, res)=>{
+    var modificando= await publicaciones.findById(req.params.id);
+    res.render("crear",{
+        seleccionado: "Crear",
+        title: "Modificar post",
+        link: "/modificarPublicacion/"+req.params.id,
+        documentos: modificando,
+        boton: "Guardar",
+        editando: true
+    })
+})
+
+app.post("/modificarPublicacion/:id", async(req, res)=>{
+    const fecha = new Date();
+    var dia = (fecha.getFullYear())+"/"+((fecha.getMonth()+1))+"/"+(fecha.getDay())+" "+fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
+    var dcorta = (req.body.descripcion).substring(0, 25)+"...";
+
+    var llamada= await publicaciones.findById(req.params.id)
+    llamada.autor= req.body.autor;
+    llamada.titulo= req.body.titulo;
+    llamada.imagen= req.body.imagen;
+    llamada.descripcion= req.body.descripcion;
+    llamada.descripcion_corta= dcorta;
+    llamada.tags= req.body.tags;
+    llamada.fecha= llamada.fecha;
+    llamada.ult_modificacion= dia;
+
+    await llamada.save();
+    res.redirect("/inicio")
+})
+
+app.get("/eliminar/:id", async(req, res)=>{
+    var elimando = await publicaciones.findById(req.params.id);
+    await elimando.remove();
+    console.log("se ha eliminado el elmento")
+    res.redirect("/inicio")
+
+})
+
 
 app.listen(3000);
