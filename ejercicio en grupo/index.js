@@ -53,18 +53,9 @@ app.post("/crearPublicacion", async (req, res)=>{
         tags:req.body.tags
     });
     await nueva_publicacion.save();
-<<<<<<< HEAD
-    alert("La publicacion se ha creado exitosamente!")
-=======
->>>>>>> 0eed218eedaa32625e7d4ad373fcd782d035a7ef
     console.log("Se ha creado una nueva publicacion");
     res.redirect("/crear");
 
 })
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 0eed218eedaa32625e7d4ad373fcd782d035a7ef
 app.listen(3000);
