@@ -2,23 +2,23 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var post = new Schema({
-    autor:String,
-    titulo:String,
-    imagen:String,
-    descripcion:{
+    autor: String,
+    titulo: String,
+    imagen: String,
+    descripcion: {
         type: String,
-        default:"..."
+        default: "..."
     },
-    descripcion_corta:{
+    descripcion_corta: {
         type: String,
-        default:"..."
+        default: "..."
     },
-    fecha:String,
-    ult_modificacion:{
+    fecha: String,
+    ult_modificacion: {
         type: String,
-        default:"Nunca"
+        default: "Nunca"
     },
-    tags:String,
+    tags: String,
 });
 
 module.exports = mongoose.model("Publicaciones", post);

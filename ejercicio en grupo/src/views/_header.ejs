@@ -6,9 +6,12 @@
         <% if(seleccionado == "Inicio"){ %>
             <a id="aInicio" class="aSelected" href="/inicio"><strong>INICIO</strong></a>
             <abbr style="text-decoration: none;" title="Crear una nueva publicación"><a id="aCrear" href="/crear"><strong>CREAR</strong></a></abbr>
-        <% }else{ %>
+        <% }else if(seleccionado == "Crear"){ %>
             <abbr style="text-decoration: none;" title="Regresar a la pantalla principal"><a id="aInicio" href="/inicio"><strong>INICIO</strong></a></abbr>
             <a id="aCrear" class="aSelected" href="/crear"><strong>CREAR</strong></a>
-        <% } %>
+        <% }else {%>
+            <abbr style="text-decoration: none;" title="Regresar a la pantalla principal"><a id="aInicio" href="/inicio"><strong>INICIO</strong></a></abbr>
+            <abbr style="text-decoration: none;" title="Crear una nueva publicación"><a id="aCrear" href="/crear"><strong>CREAR</strong></a></abbr>
+        <% }%>
     </div>
 </header>

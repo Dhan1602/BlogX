@@ -48,7 +48,7 @@
         margin-right: 43px;
     }
 
-    .h1Titulo{
+    .h1Titulo {
         margin-bottom: -15px;
     }
 
@@ -97,15 +97,17 @@
         border: white solid 7px;
         box-sizing: border-box;
         padding-top: 10px;
-        cursor: pointer;
+        cursor: default;
+        user-select: none;
     }
 
-    
 
-    .cardsChildren:hover{
+
+    .cardsChildren:hover {
         transform: translateY(-8px);
         border: rgb(219, 206, 193) solid 7px;
     }
+
     .verMas {
         color: rgb(255, 98, 0);
         cursor: pointer;
@@ -118,22 +120,23 @@
         font-size: 17px;
     }
 
-    .editores{
+    .editores {
         font-size: 23px;
         opacity: 0;
     }
 
-    #botModificar{
+    #botModificar {
         margin-left: 10px;
         color: rgb(255, 125, 45);
-       }
+    }
 
-    #botEliminar{
+    #botEliminar {
         margin-right: 10px;
         color: rgb(255, 125, 45);
         float: right;
     }
-    .editores:hover{
+
+    .editores:hover {
         color: rgb(255, 142, 71);
         opacity: 100%;
     }
@@ -156,7 +159,8 @@
         #cardsparent {
             grid-template-columns: repeat(2, auto);
         }
-        header{
+
+        header {
             padding-bottom: 2vw;
         }
 
@@ -167,19 +171,21 @@
     }
 
     @media screen and (max-width: 600px) {
-        header{
+        header {
             padding-bottom: 3vw;
         }
+
         body {
             margin-top: 12vw;
             margin-bottom: 12vw;
         }
+
         #cardsparent {
             grid-template-columns: repeat(1, auto);
         }
-        footer{
+
+        footer {
             font-size: 15px;
         }
     }
-
 </style>

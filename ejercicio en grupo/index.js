@@ -25,34 +25,34 @@ var publicaciones = require("./src/models/posts");
 
 app.get("/inicio", async function (req, res) {
     var posts = await publicaciones.find();
-    res.render("index",{
+    res.render("index", {
         seleccionado: "Inicio",
-        cards:posts
+        cards: posts
     });
 });
 
 app.get("/crear", async function (req, res) {
-    res.render("crear",{
-        seleccionado:"Crear", 
+    res.render("crear", {
+        seleccionado: "Crear",
         title: "Crear un post",
         link: "/crearPublicacion",
         boton: "Publicar",
-        editando:false
+        editando: false
     });
 });
 
-app.post("/crearPublicacion", async (req, res)=>{
+app.post("/crearPublicacion", async (req, res) => {
     const fecha = new Date();
-    var dia = (fecha.getFullYear())+"/"+((fecha.getMonth()+1))+"/"+(fecha.getDay())+" "+fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
-    var dcorta = (req.body.descripcion).substring(0, 25)+"...";
+    var dia = (fecha.getFullYear()) + "/" + ((fecha.getMonth() + 1)) + "/" + (fecha.getDay()) + " " + fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds();
+    var dcorta = (req.body.descripcion).substring(0, 25) + "...";
     var nueva_publicacion = new publicaciones({
-        autor:req.body.autor,
-        titulo:req.body.titulo,
-        imagen:req.body.imagen,
-        descripcion:req.body.descripcion,
-        descripcion_corta:dcorta,
-        fecha:dia,
-        tags:req.body.tags
+        autor: req.body.autor,
+        titulo: req.body.titulo,
+        imagen: req.body.imagen,
+        descripcion: req.body.descripcion,
+        descripcion_corta: dcorta,
+        fecha: dia,
+        tags: req.body.tags
     });
     await nueva_publicacion.save();
     console.log("Se ha creado una nueva publicacion");
@@ -60,38 +60,38 @@ app.post("/crearPublicacion", async (req, res)=>{
 
 })
 
-app.get("/modificar/:id", async(req, res)=>{
-    var modificando= await publicaciones.findById(req.params.id);
-    res.render("crear",{
-        seleccionado: "Crear",
+app.get("/modificar/:id", async (req, res) => {
+    var modificando = await publicaciones.findById(req.params.id);
+    res.render("crear", {
+        seleccionado: "Modificando",
         title: "Modificar post",
-        link: "/modificarPublicacion/"+req.params.id,
+        link: "/modificarPublicacion/" + req.params.id,
         documentos: modificando,
         boton: "Guardar",
         editando: true
     })
 })
 
-app.post("/modificarPublicacion/:id", async(req, res)=>{
+app.post("/modificarPublicacion/:id", async (req, res) => {
     const fecha = new Date();
-    var dia = (fecha.getFullYear())+"/"+((fecha.getMonth()+1))+"/"+(fecha.getDay())+" "+fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
-    var dcorta = (req.body.descripcion).substring(0, 25)+"...";
+    var dia = (fecha.getFullYear()) + "/" + ((fecha.getMonth() + 1)) + "/" + (fecha.getDay()) + " " + fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds();
+    var dcorta = (req.body.descripcion).substring(0, 25) + "...";
 
-    var llamada= await publicaciones.findById(req.params.id)
-    llamada.autor= req.body.autor;
-    llamada.titulo= req.body.titulo;
-    llamada.imagen= req.body.imagen;
-    llamada.descripcion= req.body.descripcion;
-    llamada.descripcion_corta= dcorta;
-    llamada.tags= req.body.tags;
-    llamada.fecha= llamada.fecha;
-    llamada.ult_modificacion= dia;
+    var llamada = await publicaciones.findById(req.params.id)
+    llamada.autor = req.body.autor;
+    llamada.titulo = req.body.titulo;
+    llamada.imagen = req.body.imagen;
+    llamada.descripcion = req.body.descripcion;
+    llamada.descripcion_corta = dcorta;
+    llamada.tags = req.body.tags;
+    llamada.fecha = llamada.fecha;
+    llamada.ult_modificacion = dia;
 
     await llamada.save();
     res.redirect("/inicio")
 })
 
-app.get("/eliminar/:id", async(req, res)=>{
+app.get("/eliminar/:id", async (req, res) => {
     var elimando = await publicaciones.findById(req.params.id);
     await elimando.remove();
     console.log("se ha eliminado el elmento")

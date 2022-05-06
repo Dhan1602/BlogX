@@ -44,7 +44,8 @@
             #aInicio:hover {
                 color: rgb(255, 98, 0);
             }
-            button{
+
+            button {
                 height: 30px;
                 border-radius: 10px;
                 width: 130px;
@@ -53,68 +54,100 @@
                 background-color: rgb(255, 119, 0);
                 color: rgb(255, 255, 255);
             }
-            button:hover{
+
+            button:hover {
                 background-color: rgb(255, 97, 35);
             }
-            button:active{
+
+            button:active {
                 background-color: rgb(215, 80, 27);
+            }
+
+            #btcancelar {
+                background-color: white;
+                color: black;
+            }
+
+            #btcancelar:hover {
+                background-color: rgb(192, 192, 192);
+            }
+
+            #btcancelar:active {
+                background-color: rgb(150, 150, 150);
             }
         </style>
 </head>
 
 <body>
     <%- include('_header.ejs') %>
-    <% if(editando==false){%>
-        <div id="total">
-            <h1><%=title %></h1>
-            <hr>
-
-            <form id="formCrear" action="<%=link%>" method="POST">
-                <!-- <span><label>Creado el: 30/90/24. </label> <label>Ult. Modific. hecha el 31/90/24</label> </span> -->
-                <input type="text" placeholder="Escribe tu nombre" name="autor"><br><br>
-                <input type="text" placeholder="Agrega un título a tu post" name="titulo"><br><br>
-                <input type="text" placeholder="Escribe la URL de la imagen que contendrá tu post"
-                    name="imagen"><br><br>
-                <textarea cols="45.5" rows="10" placeholder="Escribe el contenido de tu post aquí..."
-                    name="descripcion"></textarea><br><br>
-                <input type="text" placeholder="Etiquetas" name="tags"><br><br>
-                <button type="submit" id="btnCrear"><%=boton %></button>
-            </form>
-
-        </div><%} else{%>
+        <% if(editando==false){%>
             <div id="total">
-                <h1><%=title %></h1>
+                <h1>
+                    <%=title %>
+                </h1>
                 <hr>
-    
+
                 <form id="formCrear" action="<%=link%>" method="POST">
                     <!-- <span><label>Creado el: 30/90/24. </label> <label>Ult. Modific. hecha el 31/90/24</label> </span> -->
-                    <input value="<%= documentos.autor%>" type="text" placeholder="Escribe tu nombre" name="autor"><br><br>
-                    <input value="<%= documentos.titulo%>" type="text" placeholder="Agrega un título a tu post" name="titulo"><br><br>
-                    <input value="<%= documentos.imagen%>" type="text" placeholder="Escribe la URL de la imagen que contendrá tu post"
+                    <input type="text" placeholder="Escribe tu nombre" name="autor"><br><br>
+                    <input type="text" placeholder="Agrega un título a tu post" name="titulo"><br><br>
+                    <input type="text" placeholder="Escribe la URL de la imagen que contendrá tu post"
                         name="imagen"><br><br>
                     <textarea cols="45.5" rows="10" placeholder="Escribe el contenido de tu post aquí..."
-                        name="descripcion"><%= documentos.descripcion%></textarea><br><br>
-                    <input value="<%= documentos.tags%>" type="text" placeholder="Etiquetas" name="tags"><br><br>
-                    <button type="submit" id="btnModificar"><%=boton %></button>
+                        name="descripcion"></textarea><br><br>
+                    <input type="text" placeholder="Etiquetas" name="tags"><br><br>
+                    <button type="submit" id="btnCrear">
+                        <%=boton %>
+                    </button>
                 </form>
-    
-            </div> <%}%>
+
+            </div>
+            <%} else{%>
+                <div id="total">
+                    <h1>
+                        <%=title %>
+                    </h1>
+                    <hr>
+
+                    <form id="formCrear" action="<%=link%>" method="POST">
+                        <!-- <span><label>Creado el: 30/90/24. </label> <label>Ult. Modific. hecha el 31/90/24</label> </span> -->
+                        <input value="<%= documentos.autor%>" type="text" placeholder="Escribe tu nombre"
+                            name="autor"><br><br>
+                        <input value="<%= documentos.titulo%>" type="text" placeholder="Agrega un título a tu post"
+                            name="titulo"><br><br>
+                        <input value="<%= documentos.imagen%>" type="text"
+                            placeholder="Escribe la URL de la imagen que contendrá tu post" name="imagen"><br><br>
+                        <textarea cols="45.5" rows="10" placeholder="Escribe el contenido de tu post aquí..."
+                            name="descripcion"><%= documentos.descripcion%></textarea><br><br>
+                        <input value="<%= documentos.tags%>" type="text" placeholder="Etiquetas" name="tags"><br><br>
+                        <a href="/inicio"><button type="button" id="btcancelar">Cancelar</button></a>
+                        <button type="submit" id="btnModificar"><%=boton%></button>
+                    </form>
 
 
-        <%- include('_footer.ejs') %>
+                </div>
+                <%}%>
 
-        <script>
-            var botonModificar= document.getElementById("btnModificar")
-            botonModificar.addEventListener("click", function(){
-                alert("La publicacion se ha modificado exitosamente!")
-            })
 
-            var botonCrear= document.getElementById("btnCrear")
-            botonCrear.addEventListener("click", function(){
-                alert("La publicacion se ha creado exitosamente!")
-            })
-            
-        </script>
+                    <%- include('_footer.ejs') %>
+
+                        <script>
+                            var botonModificar = document.getElementById("btnModificar")
+                            botonModificar.addEventListener("click", function () {
+                                alert("La publicacion se ha modificado exitosamente!")
+                            })
+
+                            var botonCrear = document.getElementById("btnCrear")
+                            botonCrear.addEventListener("click", function () {
+                                alert("La publicacion se ha creado exitosamente!")
+                            })
+
+                            var btncancelar = document.querySelector("#btcancelar");
+                            btncancelar.addEventListener("click", function (e) {
+                                e.preventDefault;
+                            })
+
+                        </script>
 </body>
 
 </html>
