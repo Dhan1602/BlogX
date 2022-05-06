@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <%- include('style.ejs') %>
+        <style>
+            #total {
+                background-color: rgb(138, 138, 138);
+                text-align: center;
+                margin: 0 auto;
+                border-radius: 7px;
+                padding: 10px;
+                width: 95%;
+                color: white;
+                border: white solid 7px;
+                box-sizing: border-box;
+            }
+
+            .box {
+                width: 50%;
+                padding-right: 100px;
+            }
+
+            input {
+                height: 30px;
+                width: 470px;
+                border-radius: 10px;
+                border: none;
+                padding-left: 10px;
+                font-size: 20px;
+            }
+
+            textarea {
+                border-radius: 10px;
+                padding-left: 10px;
+                padding-top: 10px;
+                font-size: 20px;
+            }
+
+            #aInicio:hover {
+                color: rgb(255, 98, 0);
+            }
+            button{
+                height: 30px;
+                border-radius: 10px;
+                width: 130px;
+                font-size: 20px;
+                border: none;
+                background-color: rgb(255, 119, 0);
+                color: rgb(255, 255, 255);
+            }
+            button:hover{
+                background-color: rgb(255, 97, 35);
+            }
+            button:active{
+                background-color: rgb(215, 80, 27);
+            }
+        </style>
+</head>
+
+<body>
+    <%- include('_header.ejs') %>
+        <div id="total">
+            <h1><%=title %></h1>
+            <hr>
+
+            <form id="formCrear" action="/crearPublicacion" method="POST">
+                <!-- <span><label>Creado el: 30/90/24. </label> <label>Ult. Modific. hecha el 31/90/24</label> </span> -->
+                <input type="text" placeholder="Escribe tu nombre" name="autor"><br><br>
+                <input type="text" placeholder="Agrega un título a tu post" name="titulo"><br><br>
+                <input type="text" placeholder="Escribe la URL de la imagen que contendrá tu post"
+                    name="imagen"><br><br>
+                <textarea cols="45.5" rows="10" placeholder="Escribe el contenido de tu post aquí..."
+                    name="descripcion"></textarea><br><br>
+                <input type="text" placeholder="Etiquetas" name="tags"><br><br>
+                <button type="submit"><%=boton %></button>
+            </form>
+
+        </div>
+
+
+        <%- include('_footer.ejs') %>
+</body>
+
+</html>

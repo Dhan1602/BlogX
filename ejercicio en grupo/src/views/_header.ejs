@@ -1,0 +1,14 @@
+<header>
+    <div id="logo" style="cursor: default;">
+        <strong>BLOG</strong>
+    </div>
+    <div id="secciones">
+        <% if(seleccionado == "Inicio"){ %>
+            <a id="aInicio" class="aSelected" href="/inicio"><strong>INICIO</strong></a>
+            <abbr style="text-decoration: none;" title="Crear una nueva publicación"><a id="aCrear" href="/crear"><strong>CREAR</strong></a></abbr>
+        <% }else{ %>
+            <abbr style="text-decoration: none;" title="Regresar a la pantalla principal"><a id="aInicio" href="/inicio"><strong>INICIO</strong></a></abbr>
+            <a id="aCrear" class="aSelected" href="/crear"><strong>CREAR</strong></a>
+        <% } %>
+    </div>
+</header>
