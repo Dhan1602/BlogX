@@ -27,7 +27,8 @@ app.get("/inicio", async function (req, res) {
     var posts = await publicaciones.find();
     res.render("index", {
         seleccionado: "Inicio",
-        cards: posts
+        cards: posts,
+        mas:false
     });
 });
 
@@ -98,6 +99,17 @@ app.get("/eliminar/:id", async (req, res) => {
     res.redirect("/inicio")
 
 })
+
+app.get("/content/:id", async(req, res)=>{
+    var mostrar = await publicaciones.findById(req.params.id);
+    res.render("index", {
+        seleccionado: "Inicio",
+        mas:true, 
+        documentos: mostrar,
+    }); 
+})
+
+
 
 
 app.listen(3000);
