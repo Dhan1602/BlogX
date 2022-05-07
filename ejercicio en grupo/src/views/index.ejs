@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <%if (mas==false){%>
     <div id="containerInicio">
         <%- include('_header.ejs') %>
             <section id="cards">
@@ -50,7 +51,18 @@
 
             <%- include('_footer.ejs') %>
     </div>
-
+    <%}else{%>
+        <%- include('_header.ejs') %>
+        <div id="contenedor">
+            <h1><%=documentos.titulo %></h1>
+            <label><%=documentos.fecha %></label>
+            <label><%=documentos.autor %></label>
+            <img src="<%=documentos.imagen %>">
+            <p><%=documentos.descripcion %></p>
+            <label><%=documentos.tags %></label>
+        </div>
+        
+    <%}%>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         $(".cardsChildren").mouseenter(function (e) {
