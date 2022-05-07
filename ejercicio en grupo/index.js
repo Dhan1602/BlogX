@@ -25,6 +25,7 @@ var publicaciones = require("./src/models/posts");
 
 app.get("/inicio", async function (req, res) {
     var posts = await publicaciones.find();
+
     res.render("index", {
         seleccionado: "Inicio",
         cards: posts,
@@ -33,18 +34,22 @@ app.get("/inicio", async function (req, res) {
 });
 
 app.get("/crear", async function (req, res) {
+    var posts = await publicaciones.find();
     res.render("crear", {
         seleccionado: "Crear",
         title: "Crear un post",
         link: "/crearPublicacion",
         boton: "Publicar",
-        editando: false
+        editando: false,
+        cards: posts,
     });
 });
 
 app.post("/crearPublicacion", async (req, res) => {
+    var posts = await publicaciones.find();
     const fecha = new Date();
-    var dia = (fecha.getFullYear()) + "/" + ((fecha.getMonth() + 1)) + "/" + (fecha.getDay()) + " " + fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds();
+    var dia = (fecha.getFullYear()) + "/" + ((fecha.getMonth() + 1)) + "/" + (fecha.getDay());
+    var hora = fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds();
     var dcorta = (req.body.descripcion).substring(0, 25) + "...";
     var nueva_publicacion = new publicaciones({
         autor: req.body.autor,
@@ -53,7 +58,9 @@ app.post("/crearPublicacion", async (req, res) => {
         descripcion: req.body.descripcion,
         descripcion_corta: dcorta,
         fecha: dia,
-        tags: req.body.tags
+        hora: hora,
+        tags: req.body.tags,
+        cards: posts,
     });
     await nueva_publicacion.save();
     console.log("Se ha creado una nueva publicacion");
@@ -62,6 +69,7 @@ app.post("/crearPublicacion", async (req, res) => {
 })
 
 app.get("/modificar/:id", async (req, res) => {
+    var posts = await publicaciones.find();
     var modificando = await publicaciones.findById(req.params.id);
     res.render("crear", {
         seleccionado: "Modificando",
@@ -69,13 +77,15 @@ app.get("/modificar/:id", async (req, res) => {
         link: "/modificarPublicacion/" + req.params.id,
         documentos: modificando,
         boton: "Guardar",
-        editando: true
+        editando: true,
+        cards: posts,
     })
 })
 
 app.post("/modificarPublicacion/:id", async (req, res) => {
     const fecha = new Date();
-    var dia = (fecha.getFullYear()) + "/" + ((fecha.getMonth() + 1)) + "/" + (fecha.getDay()) + " " + fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds();
+    var dia = (fecha.getFullYear()) + "/" + ((fecha.getMonth() + 1)) + "/" + (fecha.getDay());
+    var hora = fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds();
     var dcorta = (req.body.descripcion).substring(0, 25) + "...";
 
     var llamada = await publicaciones.findById(req.params.id)
@@ -86,7 +96,8 @@ app.post("/modificarPublicacion/:id", async (req, res) => {
     llamada.descripcion_corta = dcorta;
     llamada.tags = req.body.tags;
     llamada.fecha = llamada.fecha;
-    llamada.ult_modificacion = dia;
+    llamada.hora = llamada.hora;
+    llamada.ult_modificacion = dia+" "+hora;
 
     await llamada.save();
     res.redirect("/inicio")
@@ -101,11 +112,13 @@ app.get("/eliminar/:id", async (req, res) => {
 })
 
 app.get("/content/:id", async(req, res)=>{
+    var posts = await publicaciones.find();
     var mostrar = await publicaciones.findById(req.params.id);
     res.render("index", {
         seleccionado: "Inicio",
         mas:true, 
         documentos: mostrar,
+        cards: posts,
     }); 
 })
 

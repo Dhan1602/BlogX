@@ -1,3 +1,8 @@
+<style>
+    #formBuscar{
+        display: inline;
+    }
+</style>
 <header>
     <div id="logo" style="cursor: default;">
         <strong>BLOG</strong>
@@ -6,11 +11,6 @@
         <% if(seleccionado == "Inicio"){ %>
             <a id="aInicio" class="aSelected" href="/inicio"><strong>INICIO</strong></a>
             <abbr style="text-decoration: none;" title="Crear una nueva publicación"><a id="aCrear" href="/crear"><strong>CREAR</strong></a></abbr>
-            <span><input type="text" placeholder="Buscar..."></label>
-            <select>
-                <option>título</option>
-            </select>
-        <button>Buscar</button></span>
             <% }else if(seleccionado == "Crear"){ %>
             <abbr style="text-decoration: none;" title="Regresar a la pantalla principal"><a id="aInicio" href="/inicio"><strong>INICIO</strong></a></abbr>
             <a id="aCrear" class="aSelected" href="/crear"><strong>CREAR</strong></a>
@@ -18,6 +18,25 @@
             <abbr style="text-decoration: none;" title="Regresar a la pantalla principal"><a id="aInicio" href="/inicio"><strong>INICIO</strong></a></abbr>
             <abbr style="text-decoration: none;" title="Crear una nueva publicación"><a id="aCrear" href="/crear"><strong>CREAR</strong></a></abbr>
         <% }%>
-
+        <form id="formBuscar" method="POST">
+            <span><input id="inputBuscar1" type="text" placeholder="Buscar..."></label>
+            <select class="selectBuscar">
+                <option value="" hidden selected disabled>Filtro</option>
+                <option value="titulo">Titulo</option>
+                <option value="autor">Autor</option>
+                <option value="descripcion">Descripcion</option>
+                <option value="etiquetas">Etiquetas</option>
+            </select>
+            <select class="selectBuscar">
+                <option value="" hidden selected disabled>Fecha</option>
+                <option value="todas">Todas</option>
+                <% for(var e=0; e< cards.length; e++){ %>
+                        <option value="<%e%>"><%= cards[e].fecha %></option>
+                <% } %>
+            </select>
+            <button id="botBuscar">Buscar</button>
+        </span>
+        </form>
+            
     </div>
 </header>

@@ -14,6 +14,7 @@ var post = new Schema({
         default: "..."
     },
     fecha: String,
+    hora: String,
     ult_modificacion: {
         type: String,
         default: "Nunca"

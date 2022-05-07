@@ -33,7 +33,7 @@
                                         <%= cards[i].descripcion_corta %>
                                     </label><br>
                                     <label><strong>Autor:</strong>
-                                        <%= cards[i].autor %> <br> Fecha: <%= cards[i].fecha %>
+                                        <%= cards[i].autor %> <br> Fecha: <%= cards[i].fecha %> <%= cards[i].hora %>
                                     </label><br>
                                     <label><strong>Ultima modificación:</strong>
                                         <%= cards[i].ult_modificacion %>
@@ -54,46 +54,66 @@
         </div>
         <%}else{%>
             <%- include('_header.ejs') %>
-                <div id="contenedorVermas">
-                    <h1 id="tituloVermas">
-                        <%=documentos.titulo %>
-                    </h1>
-                    <label id="fechaVermas">
-                        <%=documentos.fecha %>
-                    </label>
-                    <label id="autorVermas">
-                        <%=documentos.autor %>
-                    </label><br>
-                    <img src="<%=documentos.imagen %>" id="imgVermas">
-                    <p id="textoVermas">
-                        <%=documentos.descripcion %>
-                    </p>
-                    <label id="Etiquetas">
-                        <%=documentos.tags %>
-                    </label>
+                <div id="papa">
+                    <div id="contenedorVermas">
+                        <h1 id="tituloVermas">
+                            <%=documentos.titulo %>
+                        </h1>
+                        <img src="<%=documentos.imagen %>" id="imgVermas">
+                        <p id="textoVermas">
+                            <%=documentos.descripcion %>
+                        </p>
+                        <div id="Etiquetas">
+                            <img src="https://cdn-icons-png.flaticon.com/512/94/94699.png" alt="Imagen" id="tag">
+                        </div>
+                        <div id="alinear">
+                            <div id="ContenedorTag">
+                                <label id="EtiquetasVermas">
+                                    <%=documentos.tags %>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="autorF">
+                        <label id="fechaVermas">
+                            <%=documentos.fecha %> a las <%=documentos.hora %> --
+                        </label>
+                        <label id="autorVermas">
+                            <%=documentos.autor %>
+                        </label>
+                    </div>
                 </div>
+                <%- include('_footer.ejs') %>
+                    <%}%>
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                        <script>
+                            $(".cardsChildren").mouseenter(function (e) {
+                                $(e.target).children(".editores").css("opacity", "100");
+                                $(e.target).children("h1").css("opacity", "0");
+                            })
 
-                <%}%>
-                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-                    <script>
-                        $(".cardsChildren").mouseenter(function (e) {
-                            $(e.target).children(".editores").css("opacity", "100");
-                            $(e.target).children("h1").css("opacity", "0");
-                        })
+                            $(".cardsChildren").mouseleave(function (e) {
+                                $(e.target).children(".editores").css("opacity", "0");
+                                $(e.target).children("h1").css("opacity", "0");
+                            })
 
-                        $(".cardsChildren").mouseleave(function (e) {
-                            $(e.target).children(".editores").css("opacity", "0");
-                            $(e.target).children("h1").css("opacity", "0");
-                        })
+                            $(".eliminar").click(function (e) {
+                                var opcion = confirm("Esta seguro que desea eliminar esta publicacion?");
+                                if (opcion == false) {
+                                    e.preventDefault();
+                                }
+                            })
 
-                        $(".eliminar").click(function (e) {
-                            var opcion = confirm("Esta seguro que desea eliminar esta publicacion?");
-                            if (opcion == false) {
-                                e.preventDefault();
-                            }
-                        })
+                            $("#Etiquetas").mouseenter(function (e) {
+                                $("#alinear").css("opacity", "100")
+                            })
 
-                    </script>
+                            $("#Etiquetas").mouseleave(function (e) {
+                                $("#alinear").css("opacity", "0")
+                            })
+
+                        </script>
+                        <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
 </body>
 
 </html>

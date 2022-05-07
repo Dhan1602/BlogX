@@ -61,7 +61,7 @@
         color: rgb(255, 98, 0);
     }
 
-    #contenedor{
+    #contenedor {
         color: white;
     }
 
@@ -144,20 +144,135 @@
         color: rgb(255, 142, 71);
         opacity: 100%;
     }
-    #contenedorVermas{
+
+    #contenedorVermas {
         color: #FFF;
         text-align: center;
     }
-    #tituloVermas{
+
+    #tituloVermas {
         font-size: 50px;
         margin-bottom: 50px;
     }
-    #imgVermas{
+
+    #imgVermas {
         height: 50%;
         width: 50%;
         display: auto;
+        border-radius: 25px;
     }
-    
+
+    #textoVermas {
+        font-weight: 300;
+        background: #3D4f5EEF;
+        width: 80%;
+        padding: 15px;
+        text-align: justify;
+        align-items: center;
+        font-size: 23px;
+        justify-content: space-evenly;
+        margin: 0 auto;
+        border-radius: 30px;
+        margin-top: 15px;
+    }
+
+    #Etiquetas {
+        display: inline-block;
+        align-items: center;
+        margin: 25px auto;
+        border-radius: 60%;
+        border: 3px solid #FFF;
+        width: 4%;
+        padding: 10px 8px 4px 0px;
+        background-color: rgb(73, 72, 72);
+    }
+
+    #Etiquetas:hover {
+
+        background-color: white;
+
+    }
+
+    #tag {
+
+        width: 90%;
+
+    }
+
+    #EtiquetasVermas {
+
+        font-size: 30px;
+
+
+
+    }
+
+    #ContenedorTag {
+
+
+        width: 100%;
+        display: inline-block;
+
+    }
+
+    #alinear {
+
+        display: inline-block;
+        height: 45px;
+        opacity: 0;
+        margin: 0 0 40px 0;
+    }
+
+    #autorF {
+
+
+        color: white;
+        margin-left: 20px;
+
+    }
+
+    #papa {
+
+        text-align: center;
+    }
+
+    #inputBuscar1 {
+        height: 30px;
+        width: 200px;
+        border-radius: 10px;
+        border: none;
+        padding-left: 10px;
+        font-size: 20px;
+    }
+
+    #botBuscar {
+        height: 30px;
+        border-radius: 10px;
+        width: 130px;
+        font-size: 20px;
+        border: none;
+        background-color: rgb(255, 119, 0);
+        color: rgb(255, 255, 255);
+    }
+
+    #botBuscar:hover {
+        background-color: rgb(255, 97, 35);
+    }
+
+    #botBuscar:active {
+        background-color: rgb(215, 80, 27);
+    }
+
+    .selectBuscar{
+        height: 30px;
+        width: 140px;
+        border-radius: 10px;
+        border: none;
+        padding-left: 2px;
+        padding-right: 2px;
+        font-size: 20px;
+        text-align: center;
+    }
 
     /* RESPONSIVE */
 
@@ -171,8 +286,9 @@
             margin-top: 8vw;
             margin-bottom: 7vw;
         }
+    
     }
-
+    
     @media screen and (max-width: 950px) {
         #cardsparent {
             grid-template-columns: repeat(2, auto);
