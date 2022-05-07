@@ -32,7 +32,7 @@
                 <option value="" hidden selected disabled>Fecha</option>
                 <option value="todas">Todas</option>
                 <% for(var e=0; e< cards.length; e++){ %>
-                        <option value="<%e%>"><%= cards[e].fecha %></option>
+                        <option value="<%= cards[e].fecha %>"><%= cards[e].fecha %></option>
                 <% } %>
             </select>
             <button id="botBuscar">Buscar</button>
