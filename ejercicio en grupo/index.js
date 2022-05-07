@@ -56,7 +56,7 @@ app.post("/crearPublicacion", async (req, res) => {
     });
     await nueva_publicacion.save();
     console.log("Se ha creado una nueva publicacion");
-    res.redirect("/crear");
+    res.redirect("/inicio");
 
 })
 

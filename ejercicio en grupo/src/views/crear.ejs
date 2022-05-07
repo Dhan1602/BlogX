@@ -12,7 +12,7 @@
                 background-color: rgb(138, 138, 138);
                 text-align: center;
                 margin: 0 auto;
-                border-radius: 7px;
+                border-radius: 15px;
                 padding: 10px;
                 width: 95%;
                 color: white;
@@ -110,7 +110,6 @@
                     <hr>
 
                     <form id="formCrear" action="<%=link%>" method="POST">
-                        <!-- <span><label>Creado el: 30/90/24. </label> <label>Ult. Modific. hecha el 31/90/24</label> </span> -->
                         <input value="<%= documentos.autor%>" type="text" placeholder="Escribe tu nombre"
                             name="autor"><br><br>
                         <input value="<%= documentos.titulo%>" type="text" placeholder="Agrega un título a tu post"
@@ -139,7 +138,7 @@
 
                             var botonCrear = document.getElementById("btnCrear")
                             botonCrear.addEventListener("click", function () {
-                                alert("La publicacion se ha creado exitosamente!")
+                                alert("La publicacion se ha creado exitosamente!");
                             })
 
                             var btncancelar = document.querySelector("#btcancelar");
