@@ -15,12 +15,12 @@
             <abbr style="text-decoration: none;" title="Regresar a la pantalla principal"><a id="aInicio" href="/inicio"><strong>INICIO</strong></a></abbr>
             <a id="aCrear" class="aSelected" href="/crear"><strong>CREAR</strong></a>
         <% }else {%>
-            <abbr style="text-decoration: none;" title="Regresar a la pantalla principal"><a id="aInicio" href="/inicio"><strong>INICIO</strong></a></abbr>
+            <abbr style="text-decoration: none;" title="Regresar a la pantalla principal"><a id="             " href="/inicio"><strong>INICIO</strong></a></abbr>
             <abbr style="text-decoration: none;" title="Crear una nueva publicación"><a id="aCrear" href="/crear"><strong>CREAR</strong></a></abbr>
         <% }%>
         <form id="formBuscar" method="POST">
-            <span><input id="inputBuscar1" type="text" placeholder="Buscar..."></label>
-            <select class="selectBuscar">
+            <span><input required id="inputBuscar1" type="text" placeholder="Buscar..."></label>
+            <select id="slc1" class="selectBuscar">
                 <option value="" hidden selected disabled>Filtro</option>
                 <option value="todo">Todos</option>
                 <option value="titulo">Titulo</option>
@@ -28,11 +28,22 @@
                 <option value="descripcion">Descripcion</option>
                 <option value="etiquetas">Etiquetas</option>
             </select>
-            <select class="selectBuscar">
-                <option value="" hidden selected disabled>Fecha</option>
+            <select id="slc2" class="selectBuscar">
+                <option value="" hidden selected>Fecha</option>
                 <option value="todas">Todas</option>
                 <% for(var e=0; e< cards.length; e++){ %>
-                        <option value="<%= cards[e].fecha %>"><%= cards[e].fecha %></option>
+                    <% if(e>(0)){ %>
+                        <% if(e==(cards.length-1)){ %>
+                            <% if(cards[e].fecha!=cards[e-1].fecha){ %>
+                                <option value="<%= cards[e-1].fecha %>"><%= cards[e-1].fecha %></option>
+                                <option value="<%= cards[e].fecha %>"><%= cards[e].fecha %></option>
+                            <% } else {%>
+                                <option value="<%= cards[e-1].fecha %>"><%= cards[e-1].fecha %></option>
+                            <% } %>
+                        <% } else if(cards[e].fecha!=cards[e-1].fecha){ %>
+                            <option value="<%= cards[e-1].fecha %>"><%= cards[e-1].fecha %></option>
+                        <% } %>
+                    <% } %>
                 <% } %>
             </select>
             <button id="botBuscar">Buscar</button>

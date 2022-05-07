@@ -1,3 +1,19 @@
 <footer>
-    CRISTIAN BERMEO, DANIEL VELASQUEZ, JUAN PEDRAZA, WILLIAM GARCIA
+    CRISTIAN BERMEO, DANIEL VELASQUEZ, WILLIAM GARCIA, JUAN PEDRAZA
 </footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#botBuscar").click(function(e){
+        if(document.querySelector(".selectBuscar").value==""){
+        alert("Debe seleccionar los filtros necesarios para realizar la busqueda");
+        e.preventDefault();
+        }else if(document.querySelector("#slc2").value==""){
+        alert("Debe seleccionar los filtros necesarios para realizar la busqueda");
+        e.preventDefault();
+        } else if(document.querySelector("#slc1").value==""){
+        alert("Debe seleccionar los filtros necesarios para realizar la busqueda");
+        e.preventDefault();
+        } 
+    });
+
+</script>
