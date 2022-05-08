@@ -20,6 +20,7 @@ var post = new Schema({
         default: "Nunca"
     },
     tags: String,
+    categoria: String
 });
 
 module.exports = mongoose.model("Publicaciones", post);

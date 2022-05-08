@@ -28,7 +28,7 @@ app.get("/inicio", async function (req, res) {
     res.render("index", {
         seleccionado: "Inicio",
         cards: posts,
-        mas:false
+        mas: false
     });
 });
 
@@ -60,6 +60,7 @@ app.post("/crearPublicacion", async (req, res) => {
         fecha: dia,
         hora: hora,
         tags: req.body.tags,
+        categoria: req.body.categoria,
         cards: posts,
     });
     await nueva_publicacion.save();
@@ -97,7 +98,8 @@ app.post("/modificarPublicacion/:id", async (req, res) => {
     llamada.tags = req.body.tags;
     llamada.fecha = llamada.fecha;
     llamada.hora = llamada.hora;
-    llamada.ult_modificacion = dia+" "+hora;
+    llamada.categoria = req.body.categoria
+    llamada.ult_modificacion = dia + " " + hora;
 
     await llamada.save();
     res.redirect("/inicio")
@@ -111,15 +113,65 @@ app.get("/eliminar/:id", async (req, res) => {
 
 })
 
-app.get("/content/:id", async(req, res)=>{
+app.get("/content/:id", async (req, res) => {
     var posts = await publicaciones.find();
     var mostrar = await publicaciones.findById(req.params.id);
     res.render("index", {
         seleccionado: "verMas",
-        mas:true, 
+        mas: true,
         documentos: mostrar,
         cards: posts,
-    }); 
+    });
+})
+
+app.post("/busqueda", async (req, res) => {
+    var todo = await publicaciones.find();
+    var filtro = req.body.filtro
+    var orden = req.body.ordenBusqueda
+    var busqueda = req.body.busqueda
+    var fecha = todo.fecha;
+
+
+    if (filtro == "titulo" && orden == "reciente") {
+        var posts = await publicaciones.find({ titulo: { $regex: busqueda, $options: "$i" } }).sort({fecha:-1});
+
+    } else if (filtro == "autor" && orden == "reciente") {
+        var posts = await publicaciones.find({ autor: { $regex: busqueda, $options: "$i" } }).sort({fecha:-1});
+
+    } else if (filtro == "descripcion" && orden == "reciente") {
+        var posts = await publicaciones.find({ descripcion: { $regex: busqueda, $options: "$i" } }).sort({fecha:-1});
+
+    } else if (filtro == "etiquetas" && orden == "reciente") {
+        var posts = await publicaciones.find({ etiquetas: { $regex: busqueda, $options: "$i" } }).sort({fecha:-1});
+
+    } else if (filtro == "categoria" && orden == "reciente") {
+        var posts = await publicaciones.find({ categoria: { $regex: busqueda, $options: "$i" } }).sort({fecha:-1});
+
+    } else if (filtro == "titulo" && orden == "antiguo") {                                            // De mas antiguo a mas reciente
+        var posts = await publicaciones.find({ titulo: { $regex: busqueda, $options: "$i" } }).sort({fecha:1});
+
+    } else if (filtro == "autor" && orden == "antiguo") {
+        var posts = await publicaciones.find({ autor: { $regex: busqueda, $options: "$i" } }).sort({fecha:1});
+
+    } else if (filtro == "descripcion" && orden == "antiguo") {
+        var posts = await publicaciones.find({ descripcion: { $regex: busqueda, $options: "$i" } }).sort({fecha:1});
+
+    } else if (filtro == "etiquetas" && orden == "antiguo") {
+        var posts = await publicaciones.find({ etiquetas: { $regex: busqueda, $options: "$i" } }).sort({fecha:1});
+
+    } else if (filtro == "categoria" && orden == "antiguo") {
+        var posts = await publicaciones.find({ categoria: { $regex: busqueda, $options: "$i" } }).sort({fecha:1});
+
+    }
+
+
+
+    res.render("busqueda", {
+        seleccionado: "Inicio",
+        cards: posts,
+        mas: false
+    });
+
 })
 
 

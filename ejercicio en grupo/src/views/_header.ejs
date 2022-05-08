@@ -15,36 +15,26 @@
             <abbr style="text-decoration: none;" title="Regresar a la pantalla principal"><a id="aInicio" href="/inicio"><strong>INICIO</strong></a></abbr>
             <a id="aCrear" class="aSelected" href="/crear"><strong>CREAR</strong></a>
         <% }else {%>
-            <abbr style="text-decoration: none;" title="Regresar a la pantalla principal"><a id="             " href="/inicio"><strong>INICIO</strong></a></abbr>
+            <abbr style="text-decoration: none;" title="Regresar a la pantalla principal"><a id="aInicio" href="/inicio"><strong>INICIO</strong></a></abbr>
             <abbr style="text-decoration: none;" title="Crear una nueva publicación"><a id="aCrear" href="/crear"><strong>CREAR</strong></a></abbr>
         <% }%>
-        <form id="formBuscar" method="POST">
-            <span><input required id="inputBuscar1" type="text" placeholder="Buscar..."></label>
-            <select id="slc1" class="selectBuscar">
+        <form id="formBuscar" method="POST" action="/busqueda">
+            
+            <span><input required id="inputBuscar1" type="text" placeholder="Buscar..." name="busqueda"></label>
+
+            <select id="slc1" name="filtro" class="selectBuscar">
                 <option value="" hidden selected disabled>Filtro</option>
-                <option value="todo">Todos</option>
                 <option value="titulo">Titulo</option>
                 <option value="autor">Autor</option>
                 <option value="descripcion">Descripcion</option>
                 <option value="etiquetas">Etiquetas</option>
+                <option value="categoria">Categoría</option>
             </select>
-            <select id="slc2" class="selectBuscar">
-                <option value="" hidden selected>Fecha</option>
-                <option value="todas">Todas</option>
-                <% for(var e=0; e< cards.length; e++){ %>
-                    <% if(e>(0)){ %>
-                        <% if(e==(cards.length-1)){ %>
-                            <% if(cards[e].fecha!=cards[e-1].fecha){ %>
-                                <option value="<%= cards[e-1].fecha %>"><%= cards[e-1].fecha %></option>
-                                <option value="<%= cards[e].fecha %>"><%= cards[e].fecha %></option>
-                            <% } else {%>
-                                <option value="<%= cards[e-1].fecha %>"><%= cards[e-1].fecha %></option>
-                            <% } %>
-                        <% } else if(cards[e].fecha!=cards[e-1].fecha){ %>
-                            <option value="<%= cards[e-1].fecha %>"><%= cards[e-1].fecha %></option>
-                        <% } %>
-                    <% } %>
-                <% } %>
+
+            <select id="slc2" class="selectBuscar" name="ordenBusqueda">
+                <option value="" hidden selected disabled>Ordenar por...</option>
+                <option value="reciente">Mas reciente</option>
+                <option value="antiguo">Mas antiguo</option>
             </select>
             <button id="botBuscar">Buscar</button>
         </span>

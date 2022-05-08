@@ -25,7 +25,7 @@
                 padding-right: 100px;
             }
 
-            input {
+            input, select {
                 height: 30px;
                 width: 470px;
                 border-radius: 10px;
@@ -33,6 +33,7 @@
                 padding-left: 10px;
                 font-size: 20px;
             }
+
 
             textarea {
                 border-radius: 10px;
@@ -95,7 +96,16 @@
                         name="imagen"><br><br>
                     <textarea cols="45.5" rows="10" placeholder="Escribe el contenido de tu post aquí..."
                         name="descripcion"></textarea><br><br>
-                    <input type="text" placeholder="Etiquetas" name="tags"><br><br>
+                    <select name="categoria" id="CategoriaPost">
+                        <option value="" hidden selected disabled>Categoría</option>
+                        <option value="musica">Musica</option>
+                        <option value="tecnologia">Tecnologia</option>
+                        <option value="arte">Arte</option>
+                        <option value="entretenimiento">Entretenimiento</option>
+                        <option value="cine">Cine</option>
+                    </select><br><br>
+                    <input type="text" placeholder="Etiquetas" name="tags">
+                    <br><br>
                     <button type="submit" id="btnCrear">
                         <%=boton %>
                     </button>
@@ -118,6 +128,14 @@
                             placeholder="Escribe la URL de la imagen que contendrá tu post" name="imagen"><br><br>
                         <textarea cols="45.5" rows="10" placeholder="Escribe el contenido de tu post aquí..."
                             name="descripcion"><%= documentos.descripcion%></textarea><br><br>
+                            <select name="categoria" id="CategoriaPost">
+                                <option value="" hidden selected disabled>Categoría</option>
+                                <option value="musica">Musica</option>
+                                <option value="tecnologia">Tecnologia</option>
+                                <option value="arte">Arte</option>
+                                <option value="entretenimiento">Entretenimiento</option>
+                                <option value="cine">Cine</option>
+                            </select><br><br>
                         <input value="<%= documentos.tags%>" type="text" placeholder="Etiquetas" name="tags"><br><br>
                         <a href="/inicio"><button type="button" id="btcancelar">Cancelar</button></a>
                         <button type="submit" id="btnModificar"><%=boton%></button>
