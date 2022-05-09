@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <%if(encontrado=="Mentira"){%>
     
         <div id="containerInicio">
             <%- include('_header.ejs') %>
@@ -51,6 +52,15 @@
 
                 <%- include('_footer.ejs') %>
         </div>
+        <%}else{%>
+            <section id="cards">
+                <%- include('_header.ejs') %>
+                <h1 class="noEncontrado"><%=encontrado%></h1> 
+                <%- include('_footer.ejs') %>
+                </div>
+            </section>
+        <% } %>
+
                         
                         <script>
                             $(".cardsChildren").mouseenter(function (e) {
