@@ -48,7 +48,7 @@ app.get("/crear", async function (req, res) {
 app.post("/crearPublicacion", async (req, res) => {
     var posts = await publicaciones.find();
     const fecha = new Date();
-    var dia = (fecha.getFullYear()) + "/" + ((fecha.getMonth() + 1)) + "/" + (fecha.getDay() + 1);
+    var dia = (fecha.getFullYear()) + "/" + ((fecha.getMonth() + 1)) + "/" + (fecha.getDate());
     var hora = fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds();
     var dcorta = (req.body.descripcion).substring(0, 25) + "...";
     var nueva_publicacion = new publicaciones({
@@ -85,7 +85,7 @@ app.get("/modificar/:id", async (req, res) => {
 
 app.post("/modificarPublicacion/:id", async (req, res) => {
     const fecha = new Date();
-    var dia = (fecha.getFullYear()) + "/" + ((fecha.getMonth() + 1)) + "/" + (fecha.getDay() + 1);
+    var dia = (fecha.getFullYear()) + "/" + ((fecha.getMonth() + 1)) + "/" + (fecha.getDate());
     var hora = fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds();
     var dcorta = (req.body.descripcion).substring(0, 25) + "...";
 
