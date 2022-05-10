@@ -48,7 +48,7 @@ app.get("/crear", async function (req, res) {
 app.post("/crearPublicacion", async (req, res) => {
     var posts = await publicaciones.find();
     const fecha = new Date();
-    var dia = (fecha.getFullYear()) + "/" + ((fecha.getMonth() + 1)) + "/" + (fecha.getDay() + 1);
+    var dia = (fecha.getFullYear()) + "/" + ((fecha.getMonth() + 1)) + "/" + (fecha.getDate());
     var hora = fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds();
     var dcorta = (req.body.descripcion).substring(0, 25) + "...";
     var nueva_publicacion = new publicaciones({
@@ -85,7 +85,7 @@ app.get("/modificar/:id", async (req, res) => {
 
 app.post("/modificarPublicacion/:id", async (req, res) => {
     const fecha = new Date();
-    var dia = (fecha.getFullYear()) + "/" + ((fecha.getMonth() + 1)) + "/" + (fecha.getDay() + 1);
+    var dia = (fecha.getFullYear()) + "/" + ((fecha.getMonth() + 1)) + "/" + (fecha.getDate());
     var hora = fecha.getHours() + ":" + fecha.getMinutes() + ":" + fecha.getSeconds();
     var dcorta = (req.body.descripcion).substring(0, 25) + "...";
 
@@ -132,83 +132,83 @@ app.post("/busqueda", async (req, res) => {
     var fecha = todo.fecha;
 
     if (filtro == "titulo" && orden == "reciente") {
-        var posts = await publicaciones.find({ titulo: { $regex: busqueda, $options: "$i" } }).sort({fecha:-1});
-        if(posts==""){
-            var noEncontrado= "No se ha encontrado ningun resultado";
-        }else{
-            var noEncontrado="Mentira"
+        var posts = await publicaciones.find({ titulo: { $regex: busqueda, $options: "$i" } }).sort({ fecha: -1 });
+        if (posts == "") {
+            var noEncontrado = "No se ha encontrado ningun resultado";
+        } else {
+            var noEncontrado = "Mentira"
         }
 
     } else if (filtro == "autor" && orden == "reciente") {
-        var posts = await publicaciones.find({ autor: { $regex: busqueda, $options: "$i" } }).sort({fecha:-1});
-        if(posts==""){
-            var noEncontrado= "No se ha encontrado ningun resultado";
-        }else{
-            var noEncontrado="Mentira"
+        var posts = await publicaciones.find({ autor: { $regex: busqueda, $options: "$i" } }).sort({ fecha: -1 });
+        if (posts == "") {
+            var noEncontrado = "No se ha encontrado ningun resultado";
+        } else {
+            var noEncontrado = "Mentira"
         }
 
     } else if (filtro == "descripcion" && orden == "reciente") {
-        var posts = await publicaciones.find({ descripcion: { $regex: busqueda, $options: "$i" } }).sort({fecha:-1});
-        if(posts==""){
-            var noEncontrado= "No se ha encontrado ningun resultado";
-        }else{
-            var noEncontrado="Mentira"
+        var posts = await publicaciones.find({ descripcion: { $regex: busqueda, $options: "$i" } }).sort({ fecha: -1 });
+        if (posts == "") {
+            var noEncontrado = "No se ha encontrado ningun resultado";
+        } else {
+            var noEncontrado = "Mentira"
         }
 
     } else if (filtro == "etiquetas" && orden == "reciente") {
-        var posts = await publicaciones.find({ tags: { $regex: busqueda, $options: "$i" } }).sort({fecha:-1});
-        if(posts==""){
-            var noEncontrado= "No se ha encontrado ningun resultado";
-        }else{
-            var noEncontrado="Mentira"
+        var posts = await publicaciones.find({ tags: { $regex: busqueda, $options: "$i" } }).sort({ fecha: -1 });
+        if (posts == "") {
+            var noEncontrado = "No se ha encontrado ningun resultado";
+        } else {
+            var noEncontrado = "Mentira"
         }
 
     } else if (filtro == "categoria" && orden == "reciente") {
-        var posts = await publicaciones.find({ categoria: { $regex: busqueda, $options: "$i" } }).sort({fecha:-1});
-        if(posts==""){
-            var noEncontrado= "No se ha encontrado ningun resultado";
-        }else{
-            var noEncontrado="Mentira"
+        var posts = await publicaciones.find({ categoria: { $regex: busqueda, $options: "$i" } }).sort({ fecha: -1 });
+        if (posts == "") {
+            var noEncontrado = "No se ha encontrado ningun resultado";
+        } else {
+            var noEncontrado = "Mentira"
         }
 
     } else if (filtro == "titulo" && orden == "antiguo") {                                            // De mas antiguo a mas reciente
-        var posts = await publicaciones.find({ titulo: { $regex: busqueda, $options: "$i" } }).sort({fecha:1});
-        if(posts==""){
-            var noEncontrado= "No se ha encontrado ningun resultado";
-        }else{
-            var noEncontrado="Mentira"
+        var posts = await publicaciones.find({ titulo: { $regex: busqueda, $options: "$i" } }).sort({ fecha: 1 });
+        if (posts == "") {
+            var noEncontrado = "No se ha encontrado ningun resultado";
+        } else {
+            var noEncontrado = "Mentira"
         }
 
     } else if (filtro == "autor" && orden == "antiguo") {
-        var posts = await publicaciones.find({ autor: { $regex: busqueda, $options: "$i" } }).sort({fecha:1});
-        if(posts==""){
-            var noEncontrado= "No se ha encontrado ningun resultado";
-        }else{
-            var noEncontrado="Mentira"
+        var posts = await publicaciones.find({ autor: { $regex: busqueda, $options: "$i" } }).sort({ fecha: 1 });
+        if (posts == "") {
+            var noEncontrado = "No se ha encontrado ningun resultado";
+        } else {
+            var noEncontrado = "Mentira"
         }
 
     } else if (filtro == "descripcion" && orden == "antiguo") {
-        var posts = await publicaciones.find({ descripcion: { $regex: busqueda, $options: "$i" } }).sort({fecha:1});
-        if(posts==""){
-            var noEncontrado= "No se ha encontrado ningun resultado";
-        }else{
-            var noEncontrado="Mentira"
+        var posts = await publicaciones.find({ descripcion: { $regex: busqueda, $options: "$i" } }).sort({ fecha: 1 });
+        if (posts == "") {
+            var noEncontrado = "No se ha encontrado ningun resultado";
+        } else {
+            var noEncontrado = "Mentira"
         }
 
     } else if (filtro == "etiquetas" && orden == "antiguo") {
-        var posts = await publicaciones.find({ tags: { $regex: busqueda, $options: "$i" } }).sort({fecha:1});
-        if(posts==""){
-            var noEncontrado= "No se ha encontrado ningun resultado";
-        }else{
-            var noEncontrado="Mentira"
+        var posts = await publicaciones.find({ tags: { $regex: busqueda, $options: "$i" } }).sort({ fecha: 1 });
+        if (posts == "") {
+            var noEncontrado = "No se ha encontrado ningun resultado";
+        } else {
+            var noEncontrado = "Mentira"
         }
 
     } else if (filtro == "categoria" && orden == "antiguo") {
-        var posts = await publicaciones.find({ categoria: { $regex: busqueda, $options: "$i" } }).sort({fecha:1});
-        if(posts==""){
-            var noEncontrado= "No se ha encontrado ningun resultado";
-        }else{
-            var noEncontrado="Mentira"
+        var posts = await publicaciones.find({ categoria: { $regex: busqueda, $options: "$i" } }).sort({ fecha: 1 });
+        if (posts == "") {
+            var noEncontrado = "No se ha encontrado ningun resultado";
+        } else {
+            var noEncontrado = "Mentira"
         }
 
     }
