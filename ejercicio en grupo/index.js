@@ -124,105 +124,71 @@ app.get("/content/:id", async (req, res) => {
     });
 })
 
+function noResultados(a){
+    if (a == "") {
+        var noEncontrado = "No se ha encontrado ningun resultado";
+    } else {
+        var noEncontrado = "Mentira"
+    }
+    return noEncontrado;
+}
+
 app.post("/busqueda", async (req, res) => {
-    var todo = await publicaciones.find();
-    var filtro = req.body.filtro
-    var orden = req.body.ordenBusqueda
-    var busqueda = req.body.busqueda
-    var fecha = todo.fecha;
+    var orden = req.body.ordenBusqueda;
+    var busqueda = req.body.busqueda;
+    var filtro = req.body.filtro;
 
     if (filtro == "titulo" && orden == "reciente") {
         var posts = await publicaciones.find({ titulo: { $regex: busqueda, $options: "$i" } }).sort({ fecha: -1 });
-        if (posts == "") {
-            var noEncontrado = "No se ha encontrado ningun resultado";
-        } else {
-            var noEncontrado = "Mentira"
-        }
+        noResultados(posts);
 
     } else if (filtro == "autor" && orden == "reciente") {
         var posts = await publicaciones.find({ autor: { $regex: busqueda, $options: "$i" } }).sort({ fecha: -1 });
-        if (posts == "") {
-            var noEncontrado = "No se ha encontrado ningun resultado";
-        } else {
-            var noEncontrado = "Mentira"
-        }
+        noResultados(posts);
 
     } else if (filtro == "descripcion" && orden == "reciente") {
         var posts = await publicaciones.find({ descripcion: { $regex: busqueda, $options: "$i" } }).sort({ fecha: -1 });
-        if (posts == "") {
-            var noEncontrado = "No se ha encontrado ningun resultado";
-        } else {
-            var noEncontrado = "Mentira"
-        }
+        noResultados(posts);
 
     } else if (filtro == "etiquetas" && orden == "reciente") {
         var posts = await publicaciones.find({ tags: { $regex: busqueda, $options: "$i" } }).sort({ fecha: -1 });
-        if (posts == "") {
-            var noEncontrado = "No se ha encontrado ningun resultado";
-        } else {
-            var noEncontrado = "Mentira"
-        }
+        noResultados(posts);
 
     } else if (filtro == "categoria" && orden == "reciente") {
         var posts = await publicaciones.find({ categoria: { $regex: busqueda, $options: "$i" } }).sort({ fecha: -1 });
-        if (posts == "") {
-            var noEncontrado = "No se ha encontrado ningun resultado";
-        } else {
-            var noEncontrado = "Mentira"
-        }
+        noResultados(posts);
 
     } else if (filtro == "titulo" && orden == "antiguo") {                                            // De mas antiguo a mas reciente
         var posts = await publicaciones.find({ titulo: { $regex: busqueda, $options: "$i" } }).sort({ fecha: 1 });
-        if (posts == "") {
-            var noEncontrado = "No se ha encontrado ningun resultado";
-        } else {
-            var noEncontrado = "Mentira"
-        }
+        noResultados(posts);
 
     } else if (filtro == "autor" && orden == "antiguo") {
         var posts = await publicaciones.find({ autor: { $regex: busqueda, $options: "$i" } }).sort({ fecha: 1 });
-        if (posts == "") {
-            var noEncontrado = "No se ha encontrado ningun resultado";
-        } else {
-            var noEncontrado = "Mentira"
-        }
+        noResultados(posts);
 
     } else if (filtro == "descripcion" && orden == "antiguo") {
         var posts = await publicaciones.find({ descripcion: { $regex: busqueda, $options: "$i" } }).sort({ fecha: 1 });
-        if (posts == "") {
-            var noEncontrado = "No se ha encontrado ningun resultado";
-        } else {
-            var noEncontrado = "Mentira"
-        }
+        noResultados(posts);
 
     } else if (filtro == "etiquetas" && orden == "antiguo") {
         var posts = await publicaciones.find({ tags: { $regex: busqueda, $options: "$i" } }).sort({ fecha: 1 });
-        if (posts == "") {
-            var noEncontrado = "No se ha encontrado ningun resultado";
-        } else {
-            var noEncontrado = "Mentira"
-        }
+        noResultados(posts);
 
     } else if (filtro == "categoria" && orden == "antiguo") {
         var posts = await publicaciones.find({ categoria: { $regex: busqueda, $options: "$i" } }).sort({ fecha: 1 });
-        if (posts == "") {
-            var noEncontrado = "No se ha encontrado ningun resultado";
-        } else {
-            var noEncontrado = "Mentira"
-        }
+        noResultados(posts);
 
     }
+
+    var seEncontro = noResultados();
 
     res.render("busqueda", {
         seleccionado: "Inicio",
         cards: posts,
         mas: false,
-        encontrado: noEncontrado
+        encontrado: seEncontro
     });
 
 })
-
-
-
 
 app.listen(3000);
