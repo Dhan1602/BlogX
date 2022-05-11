@@ -11,85 +11,80 @@
 
 <body>
     <%if(encontrado=="Mentira"){%>
-    
         <div id="containerInicio">
             <%- include('_header.ejs') %>
-                <section id="cards">
-                    <div id="cardsparent">
-                        <% for(var i=0; i< cards.length; i++){ %>
-                            <div class="cardsChildren"
-                                style="background: rgba(0, 0, 0, 0.7) url('<%= cards[i].imagen %>') no-repeat; background-size: cover;">
-                                <a id="botModificar" class="editores" href="/modificar/<%= cards[i]._id %>"> <strong>
-                                        Modificar </strong> </a>
-                                <a id="botEliminar" class="eliminar editores" href="/eliminar/<%= cards[i]._id %>">
-                                    <strong>
-                                        X</strong> </a>
-                                <div class="cardContent">
-                                    <strong>
-                                        <h1 class="h1Titulo">
-                                            <%= cards[i].titulo %>
-                                        </h1>
-                                    </strong><br>
-                                    <label>
-                                        <%= cards[i].descripcion_corta %>
-                                    </label><br>
-                                    <label><strong>Autor:</strong>
-                                        <%= cards[i].autor %> <br> Fecha: <%= cards[i].fecha %> <%= cards[i].hora %>
-                                    </label><br>
-                                    <label><strong>Ultima modificación:</strong>
-                                        <%= cards[i].ult_modificacion %>
-                                    </label><br>
-                                    <a class="verMas" href="/content/<%= cards[i]._id %>">Ver mas...</a>
-                                </div>
-                            </div>
-
-
-                            <% } %>
-                    </div>
-                </section>
-
-                <section id="postSeleccionado"></section>
-
-                <%- include('_footer.ejs') %>
-        </div>
-        <%}else{%>
             <section id="cards">
-                <%- include('_header.ejs') %>
-                <h1 class="noEncontrado"><%=encontrado%></h1> 
-                <%- include('_footer.ejs') %>
+                <div id="cardsparent">
+                    <% for(var i=0; i< cards.length; i++){ %>
+                        <div class="cardsChildren"
+                            style="background: rgba(0, 0, 0, 0.7) url('<%= cards[i].imagen %>') no-repeat; background-size: cover;">
+                            <a id="botModificar" class="editores" href="/modificar/<%= cards[i]._id %>"> <strong>
+                                    Modificar </strong> </a>
+                            <a id="botEliminar" class="eliminar editores" href="/eliminar/<%= cards[i]._id %>">
+                                <strong>
+                                    X</strong> </a>
+                            <div class="cardContent">
+                                <strong>
+                                    <h1 class="h1Titulo">
+                                        <%= cards[i].titulo %>
+                                    </h1>
+                                </strong><br>
+                                <label>
+                                    <%= cards[i].descripcion_corta %>
+                                </label><br>
+                                <label><strong>Autor:</strong>
+                                    <%= cards[i].autor %> <br> Fecha: <%= cards[i].fecha %> <%= cards[i].hora %>
+                                </label><br>
+                                <label><strong>Ultima modificación:</strong>
+                                    <%= cards[i].ult_modificacion %>
+                                </label><br>
+                                <a class="verMas" href="/content/<%= cards[i]._id %>">Ver mas...</a>
+                            </div>
+                        </div>
+
+                    <% } %>
                 </div>
             </section>
-        <% } %>
+            <%- include('_footer.ejs') %>
+        </div>
+    <%}else{%>
+        <section id="cards">
+            <%- include('_header.ejs') %>
+            <h1 class="noEncontrado"><%=encontrado%></h1> 
+            <%- include('_footer.ejs') %>
+            </div>
+        </section>
+    <% } %>
 
                         
-                        <script>
-                            $(".cardsChildren").mouseenter(function (e) {
-                                $(e.target).children(".editores").css("opacity", "100");
-                                $(e.target).children("h1").css("opacity", "0");
-                            })
+    <script>
+        $(".cardsChildren").mouseenter(function (e) {
+            $(e.target).children(".editores").css("opacity", "100");
+            $(e.target).children("h1").css("opacity", "0");
+        })
 
-                            $(".cardsChildren").mouseleave(function (e) {
-                                $(e.target).children(".editores").css("opacity", "0");
-                                $(e.target).children("h1").css("opacity", "0");
-                            })
+        $(".cardsChildren").mouseleave(function (e) {
+            $(e.target).children(".editores").css("opacity", "0");
+            $(e.target).children("h1").css("opacity", "0");
+        })
 
-                            $(".eliminar").click(function (e) {
-                                var opcion = confirm("Esta seguro que desea eliminar esta publicacion?");
-                                if (opcion == false) {
-                                    e.preventDefault();
-                                }
-                            })
+        $(".eliminar").click(function (e) {
+            var opcion = confirm("Esta seguro que desea eliminar esta publicacion?");
+            if (opcion == false) {
+                e.preventDefault();
+            }
+        })
 
-                            $("#Etiquetas").mouseenter(function (e) {
-                                $("#alinear").css("opacity", "100")
-                            })
+        $("#Etiquetas").mouseenter(function (e) {
+            $("#alinear").css("opacity", "100")
+        })
 
-                            $("#Etiquetas").mouseleave(function (e) {
-                                $("#alinear").css("opacity", "0")
-                            })
+        $("#Etiquetas").mouseleave(function (e) {
+            $("#alinear").css("opacity", "0")
+        })
 
-                        </script>
-                        <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
+    </script>
+    <script src="https://unpkg.com/boxicons@2.1.2/dist/boxicons.js"></script>
 </body>
 
 </html>

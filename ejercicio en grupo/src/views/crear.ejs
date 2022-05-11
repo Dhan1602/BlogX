@@ -81,92 +81,83 @@
 
 <body>
     <%- include('_header.ejs') %>
-        <% if(editando==false){%>
-            <div id="total">
-                <h1>
-                    <%=title %>
-                </h1>
-                <hr>
+    <% if(editando==false){%>
+        <div id="total">
+            <h1><%=title %></h1>
+            <hr>
 
-                <form id="formCrear" action="<%=link%>" method="POST">
-                    <!-- <span><label>Creado el: 30/90/24. </label> <label>Ult. Modific. hecha el 31/90/24</label> </span> -->
-                    <input type="text" placeholder="Escribe tu nombre" name="autor"><br><br>
-                    <input type="text" placeholder="Agrega un título a tu post" name="titulo"><br><br>
-                    <input type="text" placeholder="Escribe la URL de la imagen que contendrá tu post"
-                        name="imagen"><br><br>
-                    <textarea cols="45.5" rows="10" placeholder="Escribe el contenido de tu post aquí..."
-                        name="descripcion"></textarea><br><br>
-                    <select name="categoria" id="CategoriaPost">
-                        <option value="" hidden selected disabled>Categoría</option>
-                        <option value="musica">Musica</option>
-                        <option value="tecnologia">Tecnologia</option>
-                        <option value="arte">Arte</option>
-                        <option value="entretenimiento">Entretenimiento</option>
-                        <option value="cine">Cine</option>
-                        <option value="noticias">Noticias</option>
-                    </select><br><br>
-                    <input type="text" placeholder="Etiquetas" name="tags">
-                    <br><br>
-                    <button type="submit" id="btnCrear">
-                        <%=boton %>
-                    </button>
-                </form>
+            <form id="formCrear" action="<%=link%>" method="POST">
+                <input type="text" placeholder="Escribe tu nombre" name="autor"><br><br>
+                <input type="text" placeholder="Agrega un título a tu post" name="titulo"><br><br>
+                <input type="text" placeholder="Escribe la URL de la imagen que contendrá tu post"
+                    name="imagen"><br><br>
+                <textarea cols="45.5" rows="10" placeholder="Escribe el contenido de tu post aquí..."
+                    name="descripcion"></textarea><br><br>
+                <select name="categoria" id="CategoriaPost">
+                    <option value="" hidden selected disabled>Categoría</option>
+                    <option value="musica">Musica</option>
+                    <option value="tecnologia">Tecnologia</option>
+                    <option value="arte">Arte</option>
+                    <option value="entretenimiento">Entretenimiento</option>
+                    <option value="cine">Cine</option>
+                    <option value="noticias">Noticias</option>
+                </select><br><br>
+                <input type="text" placeholder="Etiquetas" name="tags">
+                <br><br>
+                <button type="submit" id="btnCrear">
+                    <%=boton %>
+                </button>
+            </form>
+        </div>
+    <%} else{%>
+        <div id="total">
+            <h1><%=title %></h1>
+            <hr>
 
-            </div>
-            <%} else{%>
-                <div id="total">
-                    <h1>
-                        <%=title %>
-                    </h1>
-                    <hr>
+            <form id="formCrear" action="<%=link%>" method="POST">
+                <input value="<%= documentos.autor%>" type="text" placeholder="Escribe tu nombre"
+                    name="autor"><br><br>
+                <input value="<%= documentos.titulo%>" type="text" placeholder="Agrega un título a tu post"
+                    name="titulo"><br><br>
+                <input value="<%= documentos.imagen%>" type="text"
+                    placeholder="Escribe la URL de la imagen que contendrá tu post" name="imagen"><br><br>
+                <textarea cols="45.5" rows="10" placeholder="Escribe el contenido de tu post aquí..."
+                    name="descripcion"><%= documentos.descripcion%></textarea><br><br>
+                <select name="categoria" id="CategoriaPost">
+                    <option value="" hidden selected disabled>Categoría</option>
+                    <option value="musica">Musica</option>
+                    <option value="tecnologia">Tecnologia</option>
+                    <option value="arte">Arte</option>
+                    <option value="entretenimiento">Entretenimiento</option>
+                    <option value="cine">Cine</option>
+                    <option value="noticias">Noticias</option>
+                </select><br><br>
+                <input value="<%= documentos.tags%>" type="text" placeholder="Etiquetas" name="tags"><br><br>
+                <a href="/inicio"><button type="button" id="btcancelar">Cancelar</button></a>
+                <button type="submit" id="btnModificar"><%=boton%></button>
+            </form>
 
-                    <form id="formCrear" action="<%=link%>" method="POST">
-                        <input value="<%= documentos.autor%>" type="text" placeholder="Escribe tu nombre"
-                            name="autor"><br><br>
-                        <input value="<%= documentos.titulo%>" type="text" placeholder="Agrega un título a tu post"
-                            name="titulo"><br><br>
-                        <input value="<%= documentos.imagen%>" type="text"
-                            placeholder="Escribe la URL de la imagen que contendrá tu post" name="imagen"><br><br>
-                        <textarea cols="45.5" rows="10" placeholder="Escribe el contenido de tu post aquí..."
-                            name="descripcion"><%= documentos.descripcion%></textarea><br><br>
-                            <select name="categoria" id="CategoriaPost">
-                                <option value="" hidden selected disabled>Categoría</option>
-                                <option value="musica">Musica</option>
-                                <option value="tecnologia">Tecnologia</option>
-                                <option value="arte">Arte</option>
-                                <option value="entretenimiento">Entretenimiento</option>
-                                <option value="cine">Cine</option>
-                                <option value="noticias">Noticias</option>
-                            </select><br><br>
-                        <input value="<%= documentos.tags%>" type="text" placeholder="Etiquetas" name="tags"><br><br>
-                        <a href="/inicio"><button type="button" id="btcancelar">Cancelar</button></a>
-                        <button type="submit" id="btnModificar"><%=boton%></button>
-                    </form>
+        </div>
+    <%}%>
+    <%- include('_footer.ejs') %>
 
+    <script>
+        var botonModificar = document.getElementById("btnModificar")
+        botonModificar.addEventListener("click", function () {
+            alert("La publicacion se ha modificado exitosamente!")
+        })
 
-                </div>
-                <%}%>
+        var botonCrear = document.getElementById("btnCrear")
+        botonCrear.addEventListener("click", function () {
+            alert("La publicacion se ha creado exitosamente!");
+        })
 
+        var btncancelar = document.querySelector("#btcancelar");
+        btncancelar.addEventListener("click", function (e) {
+            e.preventDefault;
+        })
 
-                    <%- include('_footer.ejs') %>
-
-                        <script>
-                            var botonModificar = document.getElementById("btnModificar")
-                            botonModificar.addEventListener("click", function () {
-                                alert("La publicacion se ha modificado exitosamente!")
-                            })
-
-                            var botonCrear = document.getElementById("btnCrear")
-                            botonCrear.addEventListener("click", function () {
-                                alert("La publicacion se ha creado exitosamente!");
-                            })
-
-                            var btncancelar = document.querySelector("#btcancelar");
-                            btncancelar.addEventListener("click", function (e) {
-                                e.preventDefault;
-                            })
-
-                        </script>
+    </script>
 </body>
 
 </html>
