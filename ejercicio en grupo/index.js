@@ -124,14 +124,12 @@ app.get("/content/:id", async (req, res) => {
 
 function buscar(busqueda, filtro, orden) {
 
-    var posts = {
+    var posts = {}
+    posts[filtro] = {
         $regex: busqueda,
         $options: "$i"
     }
-    var nuevoObjeto = {}
-    nuevoObjeto[filtro] = posts;
-    console.log(nuevoObjeto);
-    return nuevoObjeto;
+    return posts;
 
 }
 
