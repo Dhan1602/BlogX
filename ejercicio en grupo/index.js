@@ -64,7 +64,6 @@ app.post("/crearPublicacion", async (req, res) => {
         cards: posts,
     });
     await nueva_publicacion.save();
-    console.log("Se ha creado una nueva publicacion");
     res.redirect("/inicio");
 
 })
@@ -108,7 +107,6 @@ app.post("/modificarPublicacion/:id", async (req, res) => {
 app.get("/eliminar/:id", async (req, res) => {
     var elimando = await publicaciones.findById(req.params.id);
     await elimando.remove();
-    console.log("se ha eliminado el elmento")
     res.redirect("/inicio")
 
 })
@@ -124,71 +122,45 @@ app.get("/content/:id", async (req, res) => {
     });
 })
 
-function noResultados(a){
-    if (a == "") {
-        var noEncontrado = "No se ha encontrado ningun resultado";
-    } else {
-        var noEncontrado = "Mentira"
+function buscar(busqueda, filtro, orden) {
+
+    var posts = {
+        $regex: busqueda,
+        $options: "$i"
     }
-    return noEncontrado;
+    var nuevoObjeto = {}
+    nuevoObjeto[filtro] = posts;
+    console.log(nuevoObjeto);
+    return nuevoObjeto;
+
 }
 
-app.post("/busqueda", async (req, res) => {
-    var orden = req.body.ordenBusqueda;
-    var busqueda = req.body.busqueda;
-    var filtro = req.body.filtro;
+app.post("/busqueda", async function (req, res) {
 
-    if (filtro == "titulo" && orden == "reciente") {
-        var posts = await publicaciones.find({ titulo: { $regex: busqueda, $options: "$i" } }).sort({ fecha: -1 });
-        noResultados(posts);
+    var textoBusqueda = req.body.busqueda, filtro = req.body.filtro, orden = req.body.ordenBusqueda;
 
-    } else if (filtro == "autor" && orden == "reciente") {
-        var posts = await publicaciones.find({ autor: { $regex: busqueda, $options: "$i" } }).sort({ fecha: -1 });
-        noResultados(posts);
-
-    } else if (filtro == "descripcion" && orden == "reciente") {
-        var posts = await publicaciones.find({ descripcion: { $regex: busqueda, $options: "$i" } }).sort({ fecha: -1 });
-        noResultados(posts);
-
-    } else if (filtro == "etiquetas" && orden == "reciente") {
-        var posts = await publicaciones.find({ tags: { $regex: busqueda, $options: "$i" } }).sort({ fecha: -1 });
-        noResultados(posts);
-
-    } else if (filtro == "categoria" && orden == "reciente") {
-        var posts = await publicaciones.find({ categoria: { $regex: busqueda, $options: "$i" } }).sort({ fecha: -1 });
-        noResultados(posts);
-
-    } else if (filtro == "titulo" && orden == "antiguo") {                                            // De mas antiguo a mas reciente
-        var posts = await publicaciones.find({ titulo: { $regex: busqueda, $options: "$i" } }).sort({ fecha: 1 });
-        noResultados(posts);
-
-    } else if (filtro == "autor" && orden == "antiguo") {
-        var posts = await publicaciones.find({ autor: { $regex: busqueda, $options: "$i" } }).sort({ fecha: 1 });
-        noResultados(posts);
-
-    } else if (filtro == "descripcion" && orden == "antiguo") {
-        var posts = await publicaciones.find({ descripcion: { $regex: busqueda, $options: "$i" } }).sort({ fecha: 1 });
-        noResultados(posts);
-
-    } else if (filtro == "etiquetas" && orden == "antiguo") {
-        var posts = await publicaciones.find({ tags: { $regex: busqueda, $options: "$i" } }).sort({ fecha: 1 });
-        noResultados(posts);
-
-    } else if (filtro == "categoria" && orden == "antiguo") {
-        var posts = await publicaciones.find({ categoria: { $regex: busqueda, $options: "$i" } }).sort({ fecha: 1 });
-        noResultados(posts);
-
+    if (orden == "reciente") {
+        var nuevasCards = await publicaciones.find(buscar(textoBusqueda, filtro, orden)).sort({ fecha: -1 });
+        if (nuevasCards == "") {
+            var noEncontrado = "No se ha encontrado ningun resultado";
+        } else {
+            var noEncontrado = "Mentira"
+        }
+    } else if (orden == "antiguo") {
+        var nuevasCards = await publicaciones.find(buscar(textoBusqueda, filtro, orden)).sort({ fecha: 1 });
+        if (nuevasCards == "") {
+            var noEncontrado = "No se ha encontrado ningun resultado";
+        } else {
+            var noEncontrado = "Mentira"
+        }
     }
-
-    var seEncontro = noResultados();
 
     res.render("busqueda", {
         seleccionado: "Inicio",
-        cards: posts,
+        cards: nuevasCards,
         mas: false,
-        encontrado: seEncontro
+        encontrado: noEncontrado
     });
-
-})
+});
 
 app.listen(3000);
