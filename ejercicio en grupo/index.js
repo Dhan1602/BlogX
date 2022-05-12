@@ -5,6 +5,7 @@ const app = express();
 
 //configuraciones
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(__dirname + '/public'));
 
 var path = __dirname + "/src/views";
 app.set("views", path);
