@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const app = express();
+require("dotenv").config()
 
 //configuraciones
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -13,8 +14,7 @@ app.set("view engine", "ejs");
 
 //Mongo
 mongoose.connect
-    ("mongodb+srv://prueba123:prueba123@cluster0.tmt1b.mongodb.net/Blog?retryWrites=true&w=majority"
-    ).then((base) => {
+    (process.env.LINK).then((base) => {
         console.log("Se ha conectado con éxito a la base de datos");
     }).catch((err) => {
         console.log("Oops, ¡Ha ocurrido un error! " + err);
@@ -134,8 +134,9 @@ function buscar(busqueda, filtro, orden) {
 
 }
 
-app.post("/busqueda", async function (req, res) {
+app.post("/busqueda/:pagina", async function (req, res) {
 
+    var pagina = req.params.pagina;
     var textoBusqueda = req.body.busqueda, filtro = req.body.filtro, orden = req.body.ordenBusqueda;
 
     if (orden == "reciente") {
@@ -154,12 +155,23 @@ app.post("/busqueda", async function (req, res) {
         }
     }
 
+    if(pagina==1){
     res.render("busqueda", {
         seleccionado: "Inicio",
         cards: nuevasCards,
         mas: false,
-        encontrado: noEncontrado
+        encontrado: noEncontrado,
+        filtros: 
+        {
+            texto: textoBusqueda,
+            filtro: filtro,
+            orden: orden
+        }
     });
+    }else{res.send("Hola, valor"+pagina);}
+
+    
+
 });
 
 app.listen(3000);
